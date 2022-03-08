@@ -1,9 +1,8 @@
-# https://en.wikipedia.org/wiki/Monty_Hall_problem
+import sys
 import random
 
 
-#TODO: add command line arguments
-#TODO: make it cleanr/refavtor?
+#TODO: make it cleanr/refavtor
 
 def monty_hall_wins(N):
     doors = ['goat', 'goat', 'car']
@@ -33,11 +32,17 @@ def monty_hall_wins(N):
         if doors[final_door] == 'car':
             wins += 1
         else:
-            loss += 1  
+            loss += 1
 
     return (wins, loss)
 
+
 if __name__ == "__main__":
-    N = 100000000
+    if len(sys.argv) == 2:
+        N = int(sys.argv[1])
+    else:
+        print("Usage: main.py [iterations]", file=sys.stderr)
+        exit(1)
+
     results = monty_hall_wins(N)
-    print(f"Tries {N}\nP(Win/Swap): {results[0]/N} P(Loss/Swap): {results[1]/N}" )
+    print(f"Tries {N}\nP(Win/Swap): {results[0]/N} P(Loss/Swap): {results[1]/N}")
